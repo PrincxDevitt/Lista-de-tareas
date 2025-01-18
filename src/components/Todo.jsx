@@ -24,6 +24,12 @@ const Todo = () => {
     inputRef.current.value = "";
   };
 
+  const deleteTodo = (id) => {
+    setTodoList((prevTodos) => {
+      return prevTodos.filter((todo) => todo.id !== id);
+    });
+  };
+
   return (
     <div className="bg-white place-self-center w-11/12 max-w-md
     flex flex-col p-7 min-h-[500px] rounded-xl">
@@ -56,7 +62,13 @@ const Todo = () => {
       {/* Todo list */}
       <div>
         {todoList.map((item) => (
-          <TodoItems key={item.id} text={item.text} />
+          <TodoItems
+            key={item.id}
+            text={item.text}
+            id={item.id}
+            isComplete={item.isComplete}
+            deleteTodo={deleteTodo}
+          />
         ))}
       </div>
     </div>
@@ -64,3 +76,4 @@ const Todo = () => {
 };
 
 export default Todo;
+
